@@ -25,6 +25,12 @@
     "build:package": "echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
     "clean": "rm -rf dist",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:modules": "npm run test:esm && npm run test:cjs",
+    "test:esm": "node tests/module-compatibility.test.js",
+    "test:cjs": "node tests/module-compatibility.cjs",
+    "validate:build": "node scripts/validate-build.cjs",
     "prepublishOnly": "npm run clean && npm run build && npm run validate:build && npm run test:modules"
   },
   "keywords": [
