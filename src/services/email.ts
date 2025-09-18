@@ -1,5 +1,5 @@
-import { BaseService } from './base';
-import { EmailMessage, ApiResponse } from '../types';
+import { BaseService } from './base.js';
+import { EmailMessage, ApiResponse } from '../types/index.js';
 
 export class EmailService extends BaseService {
   async send(message: EmailMessage): Promise<ApiResponse> {

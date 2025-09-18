@@ -1,5 +1,5 @@
-import { BaseService } from './base';
-import { WhatsAppTemplate, WhatsAppNormalMessage, ApiResponse } from '../types';
+import { BaseService } from './base.js';
+import { WhatsAppTemplate, WhatsAppNormalMessage, ApiResponse } from '../types/index.js';
 
 export class WhatsAppService extends BaseService {
   async getAccounts(params?: Record<string, any>): Promise<ApiResponse> {

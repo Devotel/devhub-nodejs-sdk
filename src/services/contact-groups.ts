@@ -1,5 +1,5 @@
-import { BaseService } from './base';
-import { ApiResponse } from '../types';
+import { BaseService } from './base.js';
+import { ApiResponse } from '../types/index.js';
 
 export interface ContactGroup {
   name: string;

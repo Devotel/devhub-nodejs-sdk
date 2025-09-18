@@ -2,11 +2,30 @@
   "name": "@devotel/devhub",
   "version": "0.0.2",
   "description": "Node.js SDK for DevHub Communication API",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
   "scripts": {
-    "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "build": "npm run build:esm && npm run build:cjs && npm run build:package",
+    "build:esm": "tsc",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:package": "echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
+    "clean": "rm -rf dist",
+    "test": "jest",
+    "prepublishOnly": "npm run clean && npm run build && npm run validate:build && npm run test:modules"
   },
   "keywords": [
     "devhub",
@@ -32,6 +51,8 @@
     "axios-mock-adapter": "^1.22.0"
   },
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
   ]
 }

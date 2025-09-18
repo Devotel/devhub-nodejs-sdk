@@ -1,5 +1,5 @@
-import { BaseService } from './base';
-import { ApiResponse } from '../types';
+import { BaseService } from './base.js';
+import { ApiResponse, RcsMessage } from '../types/index.js';
 
 export class RcsService extends BaseService {
   // Accounts
@@ -43,7 +43,7 @@ export class RcsService extends BaseService {
   }
 
   // Messages
-  async send(message: any): Promise<ApiResponse> {
+  async send(message: RcsMessage): Promise<ApiResponse> {
     return this.request({
       method: 'POST',
       url: '/user-api/rcs/send',
