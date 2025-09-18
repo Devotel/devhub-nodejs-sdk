@@ -5,16 +5,16 @@ Official Node.js SDK for the DevHub Communication API.
 ## Installation
 
 ```bash
-npm install @devoteldevhub/devhub
+npm install @devotel/devhub
 ```
 
 ## Quick Start
 
 ```javascript
-import DevHubSDK from '@devoteldevhub/devhub';
+import DevHubSDK from "@devotel/devhub";
 
 const devhub = new DevHubSDK({
-  apiKey: 'your-api-key'
+  apiKey: "your-api-key",
 });
 
 // Send SMS
@@ -137,13 +137,13 @@ await devhub.rcs.getAccounts();
 // Send RCS message
 await devhub.rcs.send({
   to: "+1234567890",
-  content: { text: "Hello from RCS!" }
+  content: { text: "Hello from RCS!" },
 });
 
 // Create RCS template
 await devhub.rcs.createTemplate({
   name: "greeting",
-  content: "Hello {{name}}!"
+  content: "Hello {{name}}!",
 });
 ```
 
@@ -156,12 +156,12 @@ await devhub.contactGroups.getContactGroups();
 // Create contact group
 await devhub.contactGroups.createContactGroup({
   name: "VIP Customers",
-  description: "High value customers"
+  description: "High value customers",
 });
 
 // Update contact group
 await devhub.contactGroups.updateContactGroup("group-id", {
-  name: "Premium Customers"
+  name: "Premium Customers",
 });
 ```
 
@@ -173,8 +173,8 @@ await devhub.messages.send({
   channel: "SMS",
   sms: {
     to: "+1234567890",
-    message: "Hello!"
-  }
+    message: "Hello!",
+  },
 });
 ```
 
