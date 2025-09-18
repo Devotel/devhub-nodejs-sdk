@@ -36,15 +36,24 @@
   "keywords": [
     "devhub",
     "devotel",
-    "communication",
-    "api",
     "sdk",
+    "api",
+    "rest",
     "sms",
     "email",
-    "whatsapp"
+    "whatsapp",
+    "rcs",
+    "contacts",
+    "messaging"
   ],
   "author": "DevHub Team",
   "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "axios": "^1.6.0"
   },

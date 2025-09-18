@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/@devotel%2Fdevhub.svg)](https://badge.fury.io/js/@devotel%2Fdevhub)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-green.svg)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-14%2B-green.svg)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![ESM](https://img.shields.io/badge/ESM-Ready-brightgreen.svg)](https://nodejs.org/api/esm.html)
 [![CommonJS](https://img.shields.io/badge/CommonJS-Ready-brightgreen.svg)](https://nodejs.org/api/modules.html)
