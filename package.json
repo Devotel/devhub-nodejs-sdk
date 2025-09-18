@@ -1,6 +1,6 @@
 {
   "name": "@devotel/devhub",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Node.js SDK for DevHub Communication API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
