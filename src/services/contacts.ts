@@ -1,5 +1,5 @@
-import { BaseService } from './base';
-import { Contact, CustomField, ApiResponse } from '../types';
+import { BaseService } from './base.js';
+import { Contact, CustomField, ApiResponse } from '../types/index.js';
 
 export class ContactsService extends BaseService {
   // Custom Fields

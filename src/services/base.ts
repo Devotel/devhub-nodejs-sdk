@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { DevHubConfig, ApiResponse } from '../types';
+import { DevHubConfig, ApiResponse } from '../types/index.js';
 
 export class BaseService {
   protected client: AxiosInstance;

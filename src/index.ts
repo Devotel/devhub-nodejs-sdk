@@ -1,13 +1,13 @@
-import { DevHubConfig } from './types';
-import { SmsService } from './services/sms';
-import { EmailService } from './services/email';
-import { WhatsAppService } from './services/whatsapp';
-import { RcsService } from './services/rcs';
-import { ContactsService } from './services/contacts';
-import { ContactGroupsService } from './services/contact-groups';
-import { MessagesService } from './services/messages';
+import { DevHubConfig } from './types/index.js';
+import { SmsService } from './services/sms.js';
+import { EmailService } from './services/email.js';
+import { WhatsAppService } from './services/whatsapp.js';
+import { RcsService } from './services/rcs.js';
+import { ContactsService } from './services/contacts.js';
+import { ContactGroupsService } from './services/contact-groups.js';
+import { MessagesService } from './services/messages.js';
 
-export class DevHubSDK {
+class DevHubSDK {
   public sms: SmsService;
   public email: EmailService;
   public whatsapp: WhatsAppService;
@@ -27,13 +27,14 @@ export class DevHubSDK {
   }
 }
 
-export * from './types';
-export * from './services/sms';
-export * from './services/email';
-export * from './services/whatsapp';
-export * from './services/rcs';
-export * from './services/contacts';
-export * from './services/contact-groups';
-export * from './services/messages';
+export * from './types/index.js';
+export * from './services/sms.js';
+export * from './services/email.js';
+export * from './services/whatsapp.js';
+export * from './services/rcs.js';
+export * from './services/contacts.js';
+export * from './services/contact-groups.js';
+export * from './services/messages.js';
 
+export { DevHubSDK };
 export default DevHubSDK;

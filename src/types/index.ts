@@ -11,10 +11,16 @@ export interface ApiResponse<T = any> {
 
 // SMS Types
 export interface SmsMessage {
-  to: string;
+  recipient: string;
   message: string;
-  from?: string;
+  sender?: string;
   user_id?: string;
+  tenant_id?: string;
+  scheduleDate?: string;
+  hlrValidation?: boolean;
+  isOptoutEnabled?: boolean;
+  optId?: string;
+  language?: string;
 }
 
 export interface BuyNumberRequest {
@@ -26,13 +32,14 @@ export interface BuyNumberRequest {
 
 // Email Types
 export interface EmailMessage {
-  to: string;
+  recipient: string;
   subject: string;
-  html?: string;
-  text?: string;
-  from?: string;
+  body: string;
+  sender?: string;
   user_id?: string;
   tenant_id?: string;
+  customId?: string;
+  campaignId?: string;
 }
 
 // WhatsApp Types
@@ -46,15 +53,25 @@ export interface WhatsAppTemplate {
     components?: any[];
   };
   user_id?: string;
+  tenant_id?: string;
 }
 
 export interface WhatsAppNormalMessage {
+  account_id: string;
   to: string;
-  type: 'text' | 'image' | 'document';
+  type: 'text' | 'image' | 'video' | 'audio' | 'document';
   text?: {
     body: string;
   };
   image?: {
+    caption?: string;
+    link: string;
+  };
+  video?: {
+    caption?: string;
+    link: string;
+  };
+  audio?: {
     link: string;
   };
   document?: {
@@ -62,23 +79,43 @@ export interface WhatsAppNormalMessage {
     filename: string;
   };
   user_id?: string;
+  tenant_id?: string;
 }
 
 // Contact Types
 export interface Contact {
+  displayName?: string;
   firstName?: string;
   lastName?: string;
   phoneNumber?: string;
   email?: string;
+  address?: string;
+  birthday?: string;
+  language?: string;
+  gender?: 'male' | 'female' | 'other';
+  avatarUrl?: string;
+  whatsappSubscribed?: boolean;
+  emailSubscribed?: boolean;
+  smsSubscribed?: boolean;
+  mmsSubscribed?: boolean;
+  rcsSubscribed?: boolean;
+  status?: 'enabled' | 'disabled';
+  contactGroups?: string[];
   customFields?: Record<string, any>;
+  tags?: string[];
   tenant_id?: string;
   user_id?: string;
 }
 
 export interface CustomField {
-  name: string;
-  type: 'text' | 'number' | 'date' | 'boolean';
+  label: string;
+  component: 'Input' | 'PhoneInput' | 'Select' | 'DatePicker' | 'TimePicker' | 'Switch';
   required?: boolean;
+  min?: number;
+  max?: number;
+  options?: Array<{id: string; label: string; value: string}>;
+  defaultOption?: string;
+  type?: string;
   tenant_id?: string;
   user_id?: string;
 }
@@ -94,15 +131,54 @@ export enum ChannelType {
 
 // RCS Types
 export interface RcsMessage {
-  to: string;
-  content: any;
+  account_id: string;
+  number: string;
+  contentMessage: {
+    text?: string;
+    suggestions?: Array<{
+      reply?: {
+        text: string;
+        postbackData: string;
+      };
+      action?: {
+        text: string;
+        postbackData: string;
+        openUrlAction?: {
+          url: string;
+        };
+        dialAction?: {
+          phoneNumber: string;
+        };
+      };
+    }>;
+    contentInfo?: {
+      fileUrl: string;
+      forceRefresh?: boolean;
+      thumbnailUrl?: string;
+    };
+    richCard?: any;
+  };
   user_id?: string;
+  tenant_id?: string;
 }
 
 export interface UnifiedMessage {
   channel: ChannelType;
-  sms?: SmsMessage;
-  email?: EmailMessage;
+  sms?: {
+    sender: string;
+    recipient: string;
+    message: string;
+    user_id?: string;
+    tenant_id?: string;
+  };
+  email?: {
+    sender: string;
+    recipient: string;
+    subject: string;
+    body: string;
+    user_id?: string;
+    tenant_id?: string;
+  };
   whatsappTemplate?: WhatsAppTemplate;
   whatsappNormal?: WhatsAppNormalMessage;
   rcs?: RcsMessage;

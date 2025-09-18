@@ -1,5 +1,5 @@
-import { BaseService } from './base';
-import { UnifiedMessage, ApiResponse } from '../types';
+import { BaseService } from './base.js';
+import { UnifiedMessage, ApiResponse } from '../types/index.js';
 
 export class MessagesService extends BaseService {
   async send(message: UnifiedMessage): Promise<ApiResponse> {
