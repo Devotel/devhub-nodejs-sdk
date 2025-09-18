@@ -1,14 +1,53 @@
-# DevHub Node.js SDK
+# DevHub Node.js SDK 📡
+
+[![npm version](https://badge.fury.io/js/@devotel%2Fdevhub.svg)](https://badge.fury.io/js/@devotel%2Fdevhub)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-green.svg)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![ESM](https://img.shields.io/badge/ESM-Ready-brightgreen.svg)](https://nodejs.org/api/esm.html)
+[![CommonJS](https://img.shields.io/badge/CommonJS-Ready-brightgreen.svg)](https://nodejs.org/api/modules.html)
 
 Official Node.js SDK for the DevHub Communication API.
 
-## Installation
+## 📦 Installation
 
 ```bash
-npm install @devotel/devhub
+npm i @devotel/devhub
 ```
 
-## Quick Start
+## 🔧 Module Compatibility
+
+This SDK supports both **ESM** (ES Modules) and **CommonJS** module systems:
+
+### ESM (ES Modules)
+
+```javascript
+// Default import (recommended)
+import DevHubSDK from "@devotel/devhub";
+
+// Named import
+import { DevHubSDK } from "@devotel/devhub";
+
+const devhub = new DevHubSDK({
+  apiKey: "<your-api-key>",
+});
+```
+
+### CommonJS
+
+```javascript
+// Default import (recommended)
+const DevHubSDK = require("@devotel/devhub").default;
+
+// Named import
+const { DevHubSDK } = require("@devotel/devhub");
+
+const devhub = new DevHubSDK({
+  apiKey: "<your-api-key>",
+});
+```
+
+## 🚀 Quick Start
 
 ```javascript
 import DevHubSDK from "@devotel/devhub";
@@ -19,35 +58,38 @@ const devhub = new DevHubSDK({
 
 // Send SMS
 await devhub.sms.send({
-  to: "+1234567890",
+  recipient: "+1234567890",
   message: "Hello from DevHub!",
+  sender: "<sender>",
 });
 
 // Send Email
 await devhub.email.send({
-  to: "user@example.com",
+  recipient: "user@example.com",
   subject: "Hello",
-  html: "<h1>Hello from DevHub!</h1>",
+  body: "<h1>Hello from DevHub!</h1>",
+  sender: "sender@example.com",
 });
 
 // Send WhatsApp message
 await devhub.whatsapp.sendNormalMessage({
+  account_id: "your-account-id",
   to: "+1234567890",
   type: "text",
   text: { body: "Hello from DevHub!" },
 });
 ```
 
-## API Reference
+## 📚 API Reference
 
 ### SMS Service
 
 ```javascript
 // Send SMS
 await devhub.sms.send({
-  to: "+1234567890",
+  recipient: "+1234567890",
   message: "Your message",
-  from: "optional-sender-id",
+  sender: "optional-sender-id",
 });
 
 // Get available senders
@@ -68,10 +110,10 @@ await devhub.sms.getNumbers();
 ```javascript
 // Send email
 await devhub.email.send({
-  to: "recipient@example.com",
+  recipient: "recipient@example.com",
   subject: "Subject",
-  html: "<p>HTML content</p>",
-  text: "Plain text content",
+  body: "<p>HTML content</p>",
+  sender: "sender@example.com",
 });
 ```
 
@@ -92,6 +134,7 @@ await devhub.whatsapp.sendTemplateMessage("account-id", {
 
 // Send normal message
 await devhub.whatsapp.sendNormalMessage({
+  account_id: "your-account-id",
   to: "+1234567890",
   type: "text",
   text: { body: "Hello!" },
@@ -122,8 +165,8 @@ await devhub.contacts.updateContact("contact-id", {
 
 // Create custom field
 await devhub.contacts.createCustomField({
-  name: "Company",
-  type: "text",
+  label: "Company",
+  component: "Input",
   required: false,
 });
 ```
@@ -136,8 +179,11 @@ await devhub.rcs.getAccounts();
 
 // Send RCS message
 await devhub.rcs.send({
-  to: "+1234567890",
-  content: { text: "Hello from RCS!" },
+  account_id: "your-account-id",
+  number: "+1234567890",
+  contentMessage: {
+    text: "Hello from RCS!",
+  },
 });
 
 // Create RCS template
@@ -172,13 +218,14 @@ await devhub.contactGroups.updateContactGroup("group-id", {
 await devhub.messages.send({
   channel: "SMS",
   sms: {
-    to: "+1234567890",
+    sender: "DevHub",
+    recipient: "+1234567890",
     message: "Hello!",
   },
 });
 ```
 
-## Error Handling
+## ⚠️ Error Handling
 
 All methods return a response object with the following structure:
 
@@ -194,7 +241,7 @@ Example:
 
 ```javascript
 const result = await devhub.sms.send({
-  to: "+1234567890",
+  recipient: "+1234567890",
   message: "Hello!",
 });
 
@@ -205,6 +252,118 @@ if (result.success) {
 }
 ```
 
-## License
+## 🔷 TypeScript Support
+
+The SDK is written in TypeScript and provides full type definitions. Available types:
+
+### Core Types
+
+```typescript
+import { DevHubConfig, ApiResponse, ChannelType } from "@devotel/devhub";
+```
+
+### SMS Types
+
+```typescript
+import { SmsMessage, BuyNumberRequest } from "@devotel/devhub";
+
+// Usage
+const smsData: SmsMessage = {
+  recipient: "+1234567890",
+  message: "Hello!",
+  sender: "DevHub",
+};
+```
+
+### Email Types
+
+```typescript
+import { EmailMessage } from "@devotel/devhub";
+
+// Usage
+const emailData: EmailMessage = {
+  recipient: "user@example.com",
+  subject: "Hello",
+  body: "<h1>Hello!</h1>",
+  sender: "sender@example.com",
+};
+```
+
+### WhatsApp Types
+
+```typescript
+import { WhatsAppTemplate, WhatsAppNormalMessage } from "@devotel/devhub";
+
+// Template message
+const templateData: WhatsAppTemplate = {
+  to: "+1234567890",
+  template: {
+    name: "hello_world",
+    language: { code: "en" },
+  },
+};
+
+// Normal message
+const normalData: WhatsAppNormalMessage = {
+  account_id: "your-account-id",
+  to: "+1234567890",
+  type: "text",
+  text: { body: "Hello!" },
+};
+```
+
+### Contact Types
+
+```typescript
+import { Contact, CustomField } from "@devotel/devhub";
+
+// Contact
+const contactData: Contact = {
+  firstName: "John",
+  lastName: "Doe",
+  email: "john@example.com",
+  phoneNumber: "+1234567890",
+};
+
+// Custom field
+const fieldData: CustomField = {
+  label: "Company",
+  component: "Input",
+  required: false,
+};
+```
+
+### RCS Types
+
+```typescript
+import { RcsMessage } from "@devotel/devhub";
+
+// Usage
+const rcsData: RcsMessage = {
+  account_id: "your-account-id",
+  number: "+1234567890",
+  contentMessage: {
+    text: "Hello from RCS!",
+  },
+};
+```
+
+### Unified Messages
+
+```typescript
+import { UnifiedMessage } from "@devotel/devhub";
+
+// Usage
+const unifiedData: UnifiedMessage = {
+  channel: "SMS",
+  sms: {
+    sender: "DevHub",
+    recipient: "+1234567890",
+    message: "Hello!",
+  },
+};
+```
+
+## 📄 License
 
 MIT
